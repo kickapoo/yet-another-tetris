@@ -1,0 +1,14 @@
+
+.tetris-board-row {
+  padding: 0%;
+  margin: 0%;
+  height:23px
+}
+
+.tetris-board-row div {
+  padding: 0px;margin: 0px;
+  border: 1px inset #eee;
+  display: inline-block;
+  height: 33px;
+  width: 33px;
+}

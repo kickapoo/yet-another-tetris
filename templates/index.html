@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tetris.css')}}"></link>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  {% raw %}
+  <div id='app'>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="columns">
+          <div class="column">
+            <a v-on:click="startGame()" class="button is-link"> <span class="icon "> <i class="fas fa-play"></i></span></a>
+            <a v-on:click="pauseGame()" class="button is-warning"><span class="icon "><i class="fas fa-pause"></i></a>
+            <a v-on:click="restartGame()" class="button is-info"><span class="icon "><i class="fas fa-sync-alt"></i></a>
+            <hr>
+              <b>Status:</b> {{pause ? "Paused":"Running" }} <br>
+              <b>Score:</b> <span class="is-size-2">{{ score }}</span> <br>
+              <b># of Lines:</b> {{ successLinesNum }} <br>
+            <hr>
+            <table>
+              <tr>
+                <td><span class="icon "> <i class="fas fa-arrow-up"></i></span></td>
+                <td>Rotate </td>
+              </tr>
+              <tr>
+                <td><span class="icon "> <i class="fas fa-arrow-down"></i></span></td>
+                <td>Fall Down </td>
+              </tr>
+              <tr>
+                <td><span class="icon "> <i class="fas fa-arrow-left"></i></span></td>
+                <td> Move Left</td>
+              </tr>
+              <tr>
+                <td><span class="icon "> <i class="fas fa-arrow-right"></i></span></td>
+                <td> Move Rigth</td>
+              </tr>
+            </table>
+            <hr>
+            <div v-if="isGameOver">
+              <img src="https://s3.amazonaws.com/lowres.cartoonstock.com/sport-tackle-fly_half-tackler-wing-forward-mfln5302_low.jpg" />
+            </div>
+            <div v-if="!isGameOver">
+              <div v-for="(row, ri) in board" class="tetris-board-row ">
+                <div v-for="(cell,ci) in row" v-bind:class="{used:cell.used > 0}" v-bind:style="{backgroundColor:cell.color}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endraw %}
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="{{ url_for('static', filename='js/tetris.js')}}"></script>
+</body>
+</html>
