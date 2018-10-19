@@ -12,4 +12,4 @@ With python 3 and pipenv installed.
 3. python app.py
 4. Visit: http://localhost:5000
 
-![](giff/yet-another-tetris.gif.gif)
+![](giff/yet-another-tetris.gif)
